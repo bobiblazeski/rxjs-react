@@ -1,1 +1,19 @@
-/* CSS declarations go here */
+.pagination-view span {
+    font-size: 1.3em;
+}
+
+.row-spacing {
+    padding: 10px;
+}
+.pagination-numbers {
+    width: 20px;
+    font-size: 1.1em;
+}
+
+.pagination-label {
+    float:left;
+}
+
+.top-chart {
+    height: 250px;
+}
