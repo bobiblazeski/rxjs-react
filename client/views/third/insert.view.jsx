@@ -2,19 +2,13 @@ var interval = null;
 // Automatic entry of new fake clients
 InsertView = React.createClass({
     getInitialState: function () {
-        return {stopped: false}
+        return {stopped: true}
     },
     componentWillMount: function () {
-        var self = this;
+        toggleInserting.call(this, !this.state.stopped);
         this.handlers = {
             onClick: function () {
-                if(this.state.stopped){
-                    clearInterval(interval);
-                } else {
-                    interval = setInterval(function(){
-                        self.props.notify.onNext(Util.dummy());
-                    }, this.props.period);
-                }
+                toggleInserting.call(this, this.state.stopped);
                 this.setState({stopped: !this.state.stopped});
             }.bind(this)
         }
@@ -30,3 +24,14 @@ InsertView = React.createClass({
         );
     }
 });
+
+
+function toggleInserting(stopped) {
+    if (stopped) {
+        clearInterval(interval);
+    } else {
+        interval = setInterval(function () {
+            this.props.notify.onNext(Util.dummy());
+        }.bind(this), this.props.period);
+    }
+}
